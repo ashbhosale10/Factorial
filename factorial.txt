@@ -1,0 +1,89 @@
+Q1. Factorial
+
+activity_main.xml
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/e1"
+        android:hint="enter factorial num">
+    </EditText>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/b1"
+        android:text="factorial"
+        android:layout_gravity="center">
+    </Button>
+</LinearLayout>
+
+activity_second.xml
+
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/t1">
+    </TextView>
+
+</LinearLayout>
+
+MainActivity.java
+
+public class MainActivity extends AppCompatActivity {
+    EditText ed1;
+    Button btn;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ed1=findViewById(R.id.e1);
+        btn=findViewById(R.id.b1);
+        Bundle bundle=new Bundle();
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int val=Integer.parseInt(ed1.getText().toString());
+                Intent intent=new Intent(getApplicationContext(),SecondActivity.class);
+                bundle.putInt("key",val);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+    }
+}
+
+SecondActivity.java
+
+public class SecondActivity extends AppCompatActivity {
+    TextView tv1;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_second);
+        tv1=findViewById(R.id.t1);
+        Intent intent=getIntent();
+        Bundle bundle=intent.getExtras();
+        int val=bundle.getInt("key");
+        int fact=1;
+        for(int i=1;i<=val;i++)
+        {
+            fact=(fact*i);
+        }
+        String str=Integer.toString(fact);
+        tv1.setText(str);
+    }
+}
+
+Q2.power and Average
+
